@@ -1,10 +1,16 @@
+variables
+	Uno dos TRES
 fin_variables
+
 comienza
+	Uno<<3
+	dos<<20
+	TRES<<2
+	repite
+	  Uno<<dos-Uno
+	  si(Uno>15)entonces
+	    Uno<<dos-Uno+1
+	  finsi
+	hasta(Uno>=7)
+	Uno<<Uno+1
 termina
-si entonces fin_si repite
-id
-32 43 1322 3123 12 3213 21
-+ - / * (2313)
-si(35 <= 21)
-=/=
-//esto no debe apareccer

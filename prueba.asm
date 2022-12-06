@@ -1,0 +1,50 @@
+
+	DOBLEP	T0
+	DOBLEP	T1
+	DOBLEP	T2
+	DOBLEP	T3
+	DOBLEP	Uno
+	DOBLEP	dos
+	DOBLEP	TRES
+	MUE	3e, Uno
+	MUE	20e, dos
+	MUE	2e, TRES
+
+(E2)	MUE	RC, RC
+
+	MUE	dos, RA
+	SUBE	Uno
+	MUE	RA, T0
+	MUE	T0, Uno
+	MUE	15e, RA
+	MUE	Uno, RB
+	CMPE	RA, RB
+	SMAY	E0
+	SAL	E1
+(E0)
+	MUE	RC, RC
+
+	MUE	dos, RA
+	SUBE	Uno
+	MUE	RA, T1
+	MUE	T1, RA
+	SUME	1e
+	MUE	RA, T2
+	MUE	T2, Uno
+(E1)
+	MUE	RC, RC
+
+	MUE	7e, RA
+	MUE	Uno, RB
+	CMPE	RA, RB
+	SMAI	E3
+	SAL	E2
+(E3)
+	MUE	RC, RC
+
+	MUE	Uno, RA
+	SUME	1e
+	MUE	RA, T3
+	MUE	T3, Uno
+VUEL 0 
+FIN

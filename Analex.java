@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Analex {
     static int renglon = 0; // Almacena el renglon en el que se encuentra cada token
@@ -15,9 +16,19 @@ public class Analex {
     static String lexema = "";
     static String miToken = "";
 
-    static String[] palRes = { "SELECT", "FROM", "WHERE" };
+    private static final ArrayList<String> palRes = new ArrayList<>();
 
     public static void main(String[] argumento) {
+        palRes.add("variables");
+        palRes.add("fin_variables");
+        palRes.add("comienza");
+        palRes.add("termina");
+        palRes.add("si");
+        palRes.add("entonces");
+        palRes.add("finsi");
+        palRes.add("repite");
+        palRes.add("hasta");
+
         entrada = argumento[0] + ".prg";
         salida = argumento[0] + ".als";
         if (!xArchivo(entrada).exists()) {
@@ -34,9 +45,15 @@ public class Analex {
             lexema = "";
             miToken = getToken();
             if (!miToken.equals("nosirve")) {
-                creaEscribeArchivo(xArchivo(salida), miToken);
-                creaEscribeArchivo(xArchivo(salida), lexema);
-                creaEscribeArchivo(xArchivo(salida), renglon + "");
+                if (palRes.contains(lexema)) {
+                    creaEscribeArchivo(xArchivo(salida), lexema);
+                    creaEscribeArchivo(xArchivo(salida), lexema);
+                    creaEscribeArchivo(xArchivo(salida), renglon + "");
+                } else {
+                    creaEscribeArchivo(xArchivo(salida), miToken);
+                    creaEscribeArchivo(xArchivo(salida), lexema);
+                    creaEscribeArchivo(xArchivo(salida), renglon + "");
+                }
             }
 
         } while (!finArchivo);
@@ -97,8 +114,6 @@ public class Analex {
                     return "nosirve";
                 case 3:
                     c = readChar();
-                    System.out.println("Estado 3");
-                    System.out.println("Lee: %c" + c);
                     if (isLetter(c))
                         estado = 4;
                     else
@@ -106,23 +121,16 @@ public class Analex {
                     break;
                 case 4:
                     c = readChar();
-                    System.out.println("Estado 4");
-                    System.out.println("Lee: %c" + c);
-                    if (isLetter(c) || isDigit(c)){
+                    if (isLetter(c) || isDigit(c)) {
                         estado = 4;
-                        System.out.println("va al 4");
-                    }else if (c == '_'){
-                        System.out.println("va al 5");
+                    } else if (c == '_') {
                         estado = 5;
-                    }else{
-                    System.out.println("va al 6");
+                    } else {
                         estado = 6;
                     }
                     break;
                 case 5:
                     c = readChar();
-                    System.out.println("Estado 5");
-                    System.out.println("Lee: %s" + c);
                     if (isLetter(c) || isDigit(c))
                         estado = 4;
                     else
@@ -167,7 +175,7 @@ public class Analex {
                     break;
                 case 12:
                     c = readChar();
-                    if (c != 13 && c != 10)
+                    if (c != 13 && c != 10 && c != 255)
                         estado = 12;
                     else
                         estado = 13;
@@ -215,7 +223,7 @@ public class Analex {
                     c = readChar();
                     if (c == '=')
                         estado = 22;
-                    else if (c == '<') 
+                    else if (c == '<')
                         estado = 28;
                     else if (c == '>')
                         estado = 33;
@@ -241,6 +249,7 @@ public class Analex {
                         estado = 24;
                     else
                         estado = changeDiagram();
+                    break;
                 case 24:
                     lexema = getLexema();
                     return "dif";
@@ -284,6 +293,7 @@ public class Analex {
                         estado = 34;
                     else
                         estado = 35;
+                    break;
                 case 34:
                     lexema = getLexema();
                     return "mai";
@@ -297,6 +307,7 @@ public class Analex {
                         estado = 37;
                     else
                         estado = changeDiagram();
+                    break;
                 case 37:
                     lexema = getLexema();
                     return "dif";
