@@ -97,6 +97,8 @@ public class Analex {
                     return "nosirve";
                 case 3:
                     c = readChar();
+                    System.out.println("Estado 3");
+                    System.out.println("Lee: %c" + c);
                     if (isLetter(c))
                         estado = 4;
                     else
@@ -104,22 +106,32 @@ public class Analex {
                     break;
                 case 4:
                     c = readChar();
-                    if (isLetter(c) || isDigit(c))
+                    System.out.println("Estado 4");
+                    System.out.println("Lee: %c" + c);
+                    if (isLetter(c) || isDigit(c)){
                         estado = 4;
-                    else if (c == '_')
+                        System.out.println("va al 4");
+                    }else if (c == '_'){
+                        System.out.println("va al 5");
                         estado = 5;
-                    else
+                    }else{
+                    System.out.println("va al 6");
                         estado = 6;
+                    }
                     break;
                 case 5:
                     c = readChar();
+                    System.out.println("Estado 5");
+                    System.out.println("Lee: %s" + c);
                     if (isLetter(c) || isDigit(c))
                         estado = 4;
                     else
                         estado = changeDiagram();
+                    break;
                 case 6:
                     aA--;
                     lexema = getLexema();
+                    System.out.println("Lexema: %s" + lexema);
                     return "id";
                 case 7:
                     c = readChar();

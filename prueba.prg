@@ -1,4 +1,3 @@
-variables
 fin_variables
 comienza
 termina
@@ -8,3 +7,4 @@ id
 + - / * (2313)
 si(35 <= 21)
 =/=
+//esto no debe apareccer
